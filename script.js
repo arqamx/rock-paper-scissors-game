@@ -7,6 +7,13 @@ function getComputerChoice() {
 }
 
 // write userSelection function player selection that will get input from user through console & returns the string in lower-case to make it case-insensitive.
+function userSelection() {
+    let input;
+    while (input != 'rock' || input != 'paper' || input != 'scissors') {
+        input = prompt('Please enter "rock", "paper", or "scissors"').toLowerCase();
+    }
+    return input;
+}
 
 // write playRound function to play a single round of game. the function will take two parameters playerSelection & computerSelection. returns a strings
 // that declares the winner of the round like so: "You Lose! Paper beats Rock"
