@@ -9,7 +9,7 @@ function getComputerChoice() {
 // write getUserChoice function player selection that will get input from user through console & returns the string in lower-case to make it case-insensitive.
 function getUserChoice() {
     let input;
-    while (input != 'rock' || input != 'paper' || input != 'scissors') {
+    while (input != 'rock' && input != 'paper' && input != 'scissors') {
         input = prompt('Please enter "rock", "paper", or "scissors"').toLowerCase();
     }
     return input;
