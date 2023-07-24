@@ -48,3 +48,31 @@ function playRound() {
 
 // write game function that will use playRound function to play a 5 round game that prints the winner or looser of each round
 // and keeps score and reports a winner or loser of the game at the end. 
+function game() {
+    let userScore = 0;
+    let computerScore = 0;
+
+    for(let i = 1; i <= 5; i++){
+        console.log(`Round ${i}`);
+        let result = playRound();
+        console.log(result[0]);
+
+        if(result[1] == 1) {
+            userScore++;
+        }else if(result[1] == 2){
+            computerScore++;
+        }
+    }
+
+    if(userScore == computerScore) {
+        console('Match Draw !!')
+    } else if(userScore > computerScore) {
+        console.log('You Won !!');
+    } else {
+        console.log('You Lose !!');
+    }
+}
+
+
+// function call to initiate the game
+game();
