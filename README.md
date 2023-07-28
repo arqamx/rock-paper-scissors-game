@@ -1,3 +1,4 @@
 # rock-paper-scissors
 
-It's a JavaScript practice project console based. Maybe some time in future, I will revisit it & make it Web interface based.
+It's a JavaScript practice created originally console based.
+now it's updated to DOM-based UI.
