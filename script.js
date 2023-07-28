@@ -6,73 +6,82 @@ function getComputerChoice() {
     return options[RandomIndex];
 }
 
-// write getUserChoice function player selection that will get input from user through console & returns the string in lower-case to make it case-insensitive.
-function getUserChoice() {
-    let input;
-    while (input != 'rock' && input != 'paper' && input != 'scissors') {
-        input = prompt('Please enter "rock", "paper", or "scissors"').toLowerCase();
-    }
-    return input;
-}
 
-// write playRound function to play a single round of game. the function will take two parameters playerSelection & computerSelection. 
-// returns a array with two values.
-// first value should be a string that declares the winner of the round like so: "You Lose! Paper beats Rock".
-// second value should be a number 1, 2 or 3. if user won than 1, if the computer won than 2 or if match is a draw than 3.
-function playRound() {
-    let userSelection = getUserChoice();
+
+// this function will run on-click event (one of three buttons). this function is the game.
+
+let userScore = 0;
+let computerScore = 0;
+
+function playRound(event) {
+    let userSelection = event.target.id;;
     let computerSelection = getComputerChoice();
 
+    let result = document.querySelector('.result');
+    let p = document.createElement('p');
+
     if( userSelection == computerSelection) {
-        return [`Draw: you both select ${userSelection}`, 3];
+        p.textContent = `Draw: you both select ${userSelection}`;
     } else if(userSelection == 'rock') {
         if(computerSelection == 'paper') {
-            return ['You Lose: Paper beats Rock!', 2];
+            p.textContent = 'You Lose: Paper beats Rock!';
+            p.classList.add('red');
+            computerScore++;
         } else if(computerSelection == 'scissors') {
-            return ['You Win: Rock beats Scissors!', 1];
+            p.textContent = 'You Win: Rock beats Scissors!';
+            p.classList.add('green');
+            userScore++;
         }
     } else if(userSelection == 'paper') {
         if(computerSelection == 'rock') {
-            return ['You Win: Paper beats Rock!', 1];
+            p.textContent = 'You Win: Paper beats Rock!';
+            p.classList.add('green');
+            userScore++;
         } else if(computerSelection == 'scissors') {
-            return ['You Lose: Scissors beats Paper!', 2];
+            p.textContent = 'You Lose: Scissors beats Paper!';
+            p.classList.add('red');
+            computerScore++;
         }
     } else if(userSelection == 'scissors') {
         if(computerSelection == 'rock') {
-            return ['You Lose: Rock beats Scissors!', 2];
-        } else if(computerSelection == 'paper') {
-            return ['You Win: Scissors beats Paper!', 1];
-        }
-    }
-}
-
-// write game function that will use playRound function to play a 5 round game that prints the winner or looser of each round
-// and keeps score and reports a winner or loser of the game at the end. 
-function game() {
-    let userScore = 0;
-    let computerScore = 0;
-
-    for(let i = 1; i <= 5; i++){
-        console.log(`Round ${i}`);
-        let result = playRound();
-        console.log(result[0]);
-
-        if(result[1] == 1) {
-            userScore++;
-        }else if(result[1] == 2){
+            p.textContent = 'You Lose: Rock beats Scissors!';
+            p.classList.add('red');
             computerScore++;
+        } else if(computerSelection == 'paper') {
+            p.textContent = 'You Win: Scissors beats Paper!';
+            p.classList.add('green');
+            userScore++;
         }
     }
 
-    if(userScore == computerScore) {
-        console('Match Draw !!')
-    } else if(userScore > computerScore) {
-        console.log('You Won !!');
-    } else {
-        console.log('You Lose !!');
+    result.appendChild(p);
+    if (userScore == 3 || computerScore == 3) {
+        let hr = document.createElement('hr');
+        let hr1 = document.createElement('hr');
+        let p1 = document.createElement('p');
+
+        if(userScore == 3) {
+            result.appendChild(hr);
+            p1.textContent = 'YOU WON THE MATCH !!!';
+            p1.classList.add('green');
+            result.appendChild(p1);
+            result.appendChild(hr1);
+        }
+
+        if(computerScore == 3) {
+            result.appendChild(hr);
+            p1.textContent = 'YOU LOSE THE MATCH !!!';
+            p1.classList.add('red');
+            result.appendChild(p1);
+            result.appendChild(hr1);
+        }
+
+        userScore = 0;
+        computerScore = 0;
     }
 }
 
 
-// function call to initiate the game
-// game();
+
+let buttons = document.querySelectorAll('button');
+buttons.forEach(button => {button.addEventListener('click', playRound)});
