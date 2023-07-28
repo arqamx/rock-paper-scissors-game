@@ -75,4 +75,4 @@ function game() {
 
 
 // function call to initiate the game
-game();
+// game();
